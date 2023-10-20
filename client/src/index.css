@@ -1,0 +1,15 @@
+:root {
+    --background-color: #1876d1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open sans', sans-serif;
+}
+  
+body {
+    background: var(--background-color);
+    height: 100vh;
+}
