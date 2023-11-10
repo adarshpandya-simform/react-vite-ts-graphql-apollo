@@ -1,7 +1,8 @@
-import { Button, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { ADD_TODO_MUTATION } from '../../graphql/mutation/addTodoMutation';
+import { Button, Grid, TextField } from '@mui/material';
 import { useMutation } from '@apollo/client';
+
+import { ADD_TODO_MUTATION } from '../../graphql/mutation/addTodoMutation';
 import { GET_TODOS } from '../../graphql/queries/getTodos';
 
 interface AddTodoMutationVariables {
