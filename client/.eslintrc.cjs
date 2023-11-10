@@ -46,4 +46,5 @@ module.exports = {
       version: 'detect',
     },
   },
+  ignorePatterns:['src/graphql/generated'],
 }

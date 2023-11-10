@@ -1,0 +1,10 @@
+mutation updateTodo($id: String!, $title: String!, $completed: Boolean!) {
+    updateTodo(id: $id, title: $title, completed: $completed) {
+      todo {
+        id
+        title
+        completed
+        timestamp
+      }
+    }
+}
