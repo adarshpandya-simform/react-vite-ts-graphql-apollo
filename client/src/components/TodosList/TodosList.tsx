@@ -10,27 +10,16 @@ import {
   Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useMutation } from '@apollo/client';
 
 import { TodoStatus } from '../TodoFilter/TodoFilter';
-import { DELETE_TODO_MUTATION } from '../../graphql/mutation/deleteTodoMutation';
-import { GET_TODOS } from '../../graphql/queries/getTodos';
-import { UPDATE_TODO_MUTATION } from '../../graphql/mutation/updateTodoMutation';
-import { Todo } from '../TodosContainer/TodosContainer';
+import { useDeleteTodoMutation } from '../../graphql/generated/deleteTodoMutation.generated';
+import { useUpdateTodoMutation } from '../../graphql/generated/updateTodoMutation.generated';
+import { GetTodosDocument } from '../../graphql/generated/getTodos.generated';
+import { Todo } from '../../graphql/generated/types';
 
 interface TodosListProps {
   todos: Todo[];
   filter: string;
-}
-
-interface DeleteTodoMutationVariables {
-  id: string;
-}
-
-interface UpdateTodoMutationVariables {
-  id: string;
-  completed: boolean;
-  title: string;
 }
 
 const getListItemStyle = (completed: boolean): SxProps => {
@@ -50,29 +39,23 @@ const getDate = (timestamp: string): string =>
   new Date(+timestamp).toLocaleDateString();
 
 export const TodosList: React.FC<TodosListProps> = ({ todos, filter }) => {
-  const [deleteTodo] = useMutation<
-    typeof DELETE_TODO_MUTATION,
-    DeleteTodoMutationVariables
-  >(DELETE_TODO_MUTATION, {
-    refetchQueries: [GET_TODOS],
+  const [deleteTodo] = useDeleteTodoMutation({
+    refetchQueries: [GetTodosDocument],
   });
 
-  const [updateTodo] = useMutation<
-    typeof UPDATE_TODO_MUTATION,
-    UpdateTodoMutationVariables
-  >(UPDATE_TODO_MUTATION, {
-    refetchQueries: [GET_TODOS],
+  const [updateTodo] = useUpdateTodoMutation({
+    refetchQueries: [GetTodosDocument],
   });
 
   const handleDeletetodo = async (id: string): Promise<void> => {
     await deleteTodo({ variables: { id } });
   };
 
-  const handleUpdateTodo = async (
-    id: string,
-    title: string,
-    completed: boolean
-  ): Promise<void> => {
+  const handleUpdateTodo = async ({
+    completed,
+    id,
+    title,
+  }: Omit<Todo, 'timestamp'>): Promise<void> => {
     await updateTodo({
       variables: {
         completed: !completed,
@@ -101,11 +84,11 @@ export const TodosList: React.FC<TodosListProps> = ({ todos, filter }) => {
           button
           sx={getListItemStyle(completed)}
           key={id}
-          onClick={() => handleUpdateTodo(id, title, completed)}
+          onClick={() => handleUpdateTodo({ id, title, completed })}
         >
           <ListItemAvatar>
             <Checkbox
-              onClick={() => handleUpdateTodo(id, title, completed)}
+              onClick={() => handleUpdateTodo({ id, title, completed })}
               checked={completed}
             />
           </ListItemAvatar>

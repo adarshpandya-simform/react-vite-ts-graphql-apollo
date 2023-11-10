@@ -1,25 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
-import { useMutation } from '@apollo/client';
 
-import { ADD_TODO_MUTATION } from '../../graphql/mutation/addTodoMutation';
-import { GET_TODOS } from '../../graphql/queries/getTodos';
-
-interface AddTodoMutationVariables {
-  title: string;
-  completed: boolean;
-}
+import { useAddTodoMutation } from '../../graphql/generated/addTodoMutation.generated';
+import { GetTodosDocument } from '../../graphql/generated/getTodos.generated';
 
 export const AddTodoForm: React.FC = () => {
   const [title, setTitle] = useState('');
-  const [addTodo] = useMutation<
-    typeof ADD_TODO_MUTATION,
-    AddTodoMutationVariables
-  >(ADD_TODO_MUTATION, {
+  const [addTodo] = useAddTodoMutation({
     onCompleted: () => {
       setTitle('');
     },
-    refetchQueries: [GET_TODOS],
+    refetchQueries: [GetTodosDocument],
   });
 
   const handleAddTodo = async (): Promise<void> => {
