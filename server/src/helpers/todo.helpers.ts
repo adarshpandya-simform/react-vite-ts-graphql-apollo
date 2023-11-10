@@ -13,10 +13,9 @@ export type GetTodosResponse = TodoWithId[] | null;
 export const insertTodo = async (todo: Todo): Promise<TodoMutationResponse> => {
   const todoDocument = new TodosModel(todo);
 
-  // please grow-up mongoose 🙏
-  const { _id, ...todoProperties } = await todoDocument.save();
+  const { _id, title, timestamp, completed } = await todoDocument.save();
   return {
-    todo: { id: _id.toString(), ...todoProperties },
+    todo: { id: _id.toString(), title, timestamp, completed },
   };
 };
 
