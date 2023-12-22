@@ -13,7 +13,7 @@ const paperStyle: SxProps = {
 const gridStyle: SxProps = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '18px'
+  gap: '18px',
 } as const;
 
 export const ApplicationContainer: React.FC = () => {

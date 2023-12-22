@@ -22,7 +22,7 @@
 ![GraphQL](https://img.shields.io/badge/graphql-%231572B6.svg?style=for-the-badge&logo=graphql&logoColor=pink)
 
 ## 📝 Packages
-
+### Frontend
 - react
 - react-dom
 - typescript
@@ -33,6 +33,11 @@
 - @graphql-codegen
 - mongoose
 - graphql
+
+### Backend
+- graphql
+- graphql-yoga
+- mongoose
 
 ## ⚙️ Development
 
@@ -47,25 +52,6 @@ git clone https://github.com/adarshpandya-simform/react-vite-ts-graphql-apollo.g
 ```
 cd react-vite-ts-graphql-apollo
 ```
-## Frontend
-
-#### Change directory
-```
-cd client
-```
-
-#### Install dependencies
-
-```
-npm Install
-```
-
-#### Run React App 🎉
-
-```
-npm run dev
-```
-
 ## Backend
 
 Open new terminal and then setup server.
@@ -78,7 +64,7 @@ cd server
 #### Install dependencies
 
 ```
-npm Install
+npm install
 ```
 
 #### Run server 🎉
@@ -91,4 +77,23 @@ Open http://localhost:3000 to view it in the browser.
 
 ## ⚠️ Warning
 
-#### Remember to rename the `.env.example` file to `.env` file and fill in the `.env` file.
+#### Remember to rename the [`.env.example`](./server/.env.example) file to `.env` file and fill in the `.env` file with appropriate credentials.
+
+## Frontend
+
+#### Change directory
+```
+cd client
+```
+
+#### Install dependencies
+
+```
+npm install
+```
+
+#### Run React App (will automatically generate types with @graphql-codegen)🎉
+
+```
+npm run dev
+```
