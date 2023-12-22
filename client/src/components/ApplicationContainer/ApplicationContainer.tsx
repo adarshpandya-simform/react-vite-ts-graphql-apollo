@@ -10,10 +10,16 @@ const paperStyle: SxProps = {
   padding: '20px',
 } as const;
 
+const gridStyle: SxProps = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '18px',
+} as const;
+
 export const ApplicationContainer: React.FC = () => {
   return (
     <Paper sx={paperStyle} elevation={5}>
-      <Grid container height={'100%'} direction={'column'}>
+      <Grid sx={gridStyle}>
         <Grid item xs={1} lg={1} md={1}>
           <AddTodoForm />
         </Grid>
